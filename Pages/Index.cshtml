@@ -1,0 +1,51 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "AI Demo";
+}
+
+<form method="post" class="mt-4">
+    <div class="mb-3">
+        <label for="prompt" class="form-label">Describe the image</label>
+
+        <input id="prompt"
+               name="Prompt"
+               class="form-control"
+               placeholder="Example: a futuristic city skyline at sunset"
+               value="@Model.Prompt" />
+    </div>
+
+    <button type="submit" asp-page-handler="GenerateImage" class="btn btn-primary">
+        Generate image
+    </button>
+
+    <div class="mt-4">
+        <label for="textPrompt" class="form-label">Ask for text</label>
+        <textarea id="textPrompt"
+                  name="TextPrompt"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Example: Write a short product description for a travel app">@Model.TextPrompt</textarea>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" asp-page-handler="GenerateText" class="btn btn-success">
+            Generate text
+        </button>
+    </div>
+</form>
+
+<div class="mt-4">
+    <img src="@Model.GeneratedImageUrl"
+         alt="Generated image"
+         class="img-fluid border rounded"
+         style="max-height: 420px;" />
+</div>
+
+<div class="mt-3">
+    <label for="textAnswer" class="form-label">Answer</label>
+    <textarea id="textAnswer"
+              class="form-control"
+              rows="5"
+              readonly>@Model.TextAnswer</textarea>
+</div>
